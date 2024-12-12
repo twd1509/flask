@@ -39,9 +39,10 @@ def create_app():
     # 블루프린트
     # -> 블루프린트(Blueprint)를 사용해서 관리
     # views 폴더 안에 main_views라는 py파일을 import해서 사용
-    from .views import main_views
+    from .views import main_views, question_views
     # main_views.py에 생성된 bp 객체를 등록
     app.register_blueprint(main_views.bp)
+    app.register_blueprint(question_views.bp)
 
 
     return app
