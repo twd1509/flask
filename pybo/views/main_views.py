@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, url_for
 from werkzeug.utils import redirect
+
+# models.py에서 Question 클래스를 가져와서 사용
 from pybo.models import Question
 
 # 객체 bp 생성
@@ -22,6 +24,8 @@ def hello_pybo():
         # db에서 query해서 가져 온 question_list를 question_list.html 안의 question_list에 대입
 #     return render_template('question/question_list.html', question_list=question_list)
     #return 'Pybo index'
+
+
 @bp.route('/')
 def index():
     return redirect(url_for('question._list'))

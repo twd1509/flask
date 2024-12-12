@@ -16,7 +16,9 @@ migrate = Migrate()
 # create_app() 함수 안에
 # app 이라는 Flask 인스턴스를 생성해서 작동하게 함
 def create_app():
+    # 플라스크 서버 객체 생성
     app = Flask(__name__)
+    # config 파일을 기반으로 사용
     app.config.from_object(config)
 
     
@@ -36,13 +38,14 @@ def create_app():
     # models.py 파일을 import해서 사용( . 인 이유는 현재 __init__.py 와 models.py가 같은 경로상에 존재하므로)
     from . import models
 
-    # 블루프린트
-    # -> 블루프린트(Blueprint)를 사용해서 관리
+    # 블루프린트 -> 라우터와 관련
+    # 주소와 관련한 처리를 블루프린트(Blueprint)를 사용해서 관리
     # views 폴더 안에 main_views라는 py파일을 import해서 사용
-    from .views import main_views, question_views
+    from .views import main_views, question_views, answer_views
     # main_views.py에 생성된 bp 객체를 등록
     app.register_blueprint(main_views.bp)
     app.register_blueprint(question_views.bp)
+    app.register_blueprint(answer_views.bp)
 
 
     return app
