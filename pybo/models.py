@@ -5,6 +5,11 @@ from pybo import db
 # 클래스  = 속성(변수, 데이터) + 메서드(함수)
 # 클래스 틀, 틀로 만든 것을 객체
 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.String(50), nullable=False, unique=True)
+    password = db.Column(db.String(200), nullable=False)
+
 # db.Model이라는 클래스를 Question 받아서 새로운 클래스를 생성
 class Question(db.Model):
     # Column, primary key, nullable, DateTime -> DB에 관한 설정
@@ -12,6 +17,15 @@ class Question(db.Model):
     subject = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text(), nullable=False)
     create_date = db.Column(db.DateTime(), nullable=False)
+
+    def to_dict(self):
+        # Question 객체를 딕셔너리 객체로 변환
+        return {
+            "id": self.id,
+            "subject": self.subject,
+            "content": self.content,
+            "create_date": self.create_date.isoformat() if self.create_date else None
+        }
 
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)

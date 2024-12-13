@@ -34,6 +34,8 @@ def create_app():
     # 그러면 create_app 함수는 엄청나게 크고 복잡한 함수가 된다.
     # ORM -> DB와 연관이 됨
     db.init_app(app)
+    with app.app_context():
+        db.create_all()
     migrate.init_app(app, db)
     # models.py 파일을 import해서 사용( . 인 이유는 현재 __init__.py 와 models.py가 같은 경로상에 존재하므로)
     from . import models
